@@ -1,17 +1,8 @@
-use std::fs::File;
+use std::fs;
 use std::io::prelude::*;
 
-fn read_input() -> String{
-    let mut file = File::open("C:/git/AdventOfCode/2022/04/main/src/input.txt").unwrap();
-    let mut data = String::new();
-    file.read_to_string(&mut data).unwrap();
-    return data;
-}
-
-
-
 fn main() {
-    let input = read_input();
+    let input = fs::read_to_string("C:/git/AdventOfCode/2022/04/main/src/input.txt").unwrap();
     
     // Task 1: Count number of sets contained in the other
     // Task 2: Count number of sets that don't overalap at all
