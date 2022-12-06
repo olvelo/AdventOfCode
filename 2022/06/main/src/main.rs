@@ -4,36 +4,19 @@ use std::collections::HashSet;
 fn main() {
     let input = fs::read_to_string("C:/git/AdventOfCode/2022/06/main/src/input.txt").unwrap();
 
-    // Look for a sequence of unique letters, with number of letters given below. Set up index to track which letter this occurs at, and a vector for the letter buffer
+    // Look for a sequence of unique letters, with number of letters given below
     let unique_required = 14;
-    let mut index = 0;
     let mut myletters = vec![];
 
-    // Loop over all letters
-    for letter in input.chars(){
+    for (index, letter) in input.chars().enumerate(){
+        myletters.push(letter);
 
-        // Fill buffer at the start, if we have less letters than required length
-        if myletters.len() < unique_required{
-            myletters.push(letter);
+        // Create a hash set of the buffer length, if we have enough letters
+        let lettercopy: HashSet<&char> = if index >= unique_required {HashSet::from_iter(myletters[index - unique_required..index].iter())} else {HashSet::new()};
+        
+        if lettercopy.len() == unique_required{
+            println!("Index where we have a unique string of length {}: {}", unique_required, index);
+            break;
         }
-
-        else{
-
-            // Check if unique letters only, by sorting and removing duplicates from our array copy, and comparing their length
-            let lettercopy: HashSet<&char> = HashSet::from_iter(myletters.iter());
-
-            if lettercopy.len() == myletters.len(){
-                println!("Index where we have a unique string of length {}: {}", unique_required, index);
-                break;
-            }
-
-            // If not unique, fill buffer with new char and remove the one at the back
-            else{
-                myletters.push(letter);
-                myletters.remove(0);
-            }
-        }
-        // Remember to increase index
-        index = index + 1;
     }
 }
