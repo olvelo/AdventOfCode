@@ -1,4 +1,5 @@
 use std::fs;
+use std::collections::HashSet;
 
 fn main() {
     let input = fs::read_to_string("C:/git/AdventOfCode/2022/06/main/src/input.txt").unwrap();
@@ -19,9 +20,7 @@ fn main() {
         else{
 
             // Check if unique letters only, by sorting and removing duplicates from our array copy, and comparing their length
-            let mut lettercopy = myletters.to_vec();
-            lettercopy.sort();
-            lettercopy.dedup();
+            let lettercopy: HashSet<&char> = HashSet::from_iter(myletters.iter());
 
             if lettercopy.len() == myletters.len(){
                 println!("Index where we have a unique string of length {}: {}", unique_required, index);
