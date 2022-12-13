@@ -12,25 +12,23 @@ class packet:
         return compare(self.content, other.content)
 
 def compare(left, right):
+    retval = None
     try:
         for i in range(max(len(left), len(right))):
             if isinstance(left[i], int) and isinstance(right[i], int):
                 if left[i] < right[i]:
-                    return True
+                    retval = True
                 elif left[i] > right[i]:
-                    return False
+                    retval = False
             elif isinstance(left[i], list) and isinstance(right[i], list):
                 retval = compare(left[i], right[i])
-                if retval != None:
-                    return retval
             elif isinstance(left[i], list) and isinstance(right[i], int):
                 retval = compare(left[i], [right[i]])
-                if retval != None:
-                    return retval
             elif isinstance(left[i], int) and isinstance(right[i], list):
                 retval = compare([left[i]], right[i])
-                if retval != None:
-                    return retval
+
+            if retval != None:
+                return retval
 
     except IndexError:
         if len(left) < len(right):
@@ -54,8 +52,8 @@ for line in lines:
     packets.append(packet(eval(line)))
 packets.append(packet([[2]]))
 packets.append(packet([[6]]))
-packets.sort()
 
+packets.sort()
 decoder_key = 1
 for i, packet in enumerate(packets):
     if packet.content == [[2]] or packet.content == [[6]]:
