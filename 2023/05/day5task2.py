@@ -67,6 +67,7 @@ if __name__ == "__main__":
                             old_ranges.append(left)
                         if right[1] > right[0]:
                             old_ranges.append(right)
+                        break
 
                 if not found_overlap:
                     new_ranges.append(this_range)
@@ -76,4 +77,5 @@ if __name__ == "__main__":
         for range in new_ranges:
             if range[0] < lowest_location_number:
                 lowest_location_number = range[0]
-        print(lowest_location_number)
+
+    print(lowest_location_number)
