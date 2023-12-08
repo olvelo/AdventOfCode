@@ -35,7 +35,6 @@ def classify_hand(hand):
         else:
             temphand += char
 
-
     hand_set = set(temphand)
     hand_set_list = list(hand_set)
 
@@ -103,8 +102,3 @@ if __name__ == "__main__":
         winnings += (i+1) * hands_bids[sorted_hands[i]]
 
     print(winnings)
-
-    """
-    250692548
-    250506580
-    """
